@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {
+    useState
+} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Bootstraptab from './Bootstraptab';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const loanAppCol = [{
         dataField: "id",
@@ -28,6 +32,11 @@ const loanAppCol = [{
         dataField: 'purpose',
         text: 'Purepose',
         sort: true
+    },
+    {
+        dataField: 'status',
+        text: 'Status',
+        sort: true
     }
 ];
 const loanAppData = [{
@@ -37,35 +46,37 @@ const loanAppData = [{
     expireBy: "12/1/2020",
     term: 30,
     purpose: "rent",
+    status: "active"
+}, {
+    id: 2,
+    borrowerId: "John",
+    amount: 1000,
+    expireBy: "12/1/2020",
+    term: 40,
+    purpose: "rent",
+    status: "active"
 }];
 
 const bidCol = [{
-    dataField: "lenderId",
-    text: "Lender ID"
+    dataField: "loanAppId",
+    text: "Loan App ID"
 }, {
-    dataField: "bitAt",
-    text: "Bid At"
+    dataField: "amount",
+    text: "Amount"
+}, {
+    dataField: "term",
+    text: "Term",
 }, {
     dataField: "interest",
     text: "Interest(%)"
 }];
 
 const bidData = [{
-        lenderId: 1,
-        bitAt: "11/10/2020",
-        interest: 18
-    },
-    {
-        lenderId: 1,
-        bitAt: "11/20/2020",
-        interest: 25
-    },
-    {
-        lenderId: 1,
-        bitAt: "11/25/2020",
-        interest: 30
-    }
-];
+    loanAppId: 1,
+    amount: 1000,
+    term: 30,
+    interest: 18
+}];
 
 const loanCol = [{
     dataField: "loanId",
@@ -97,12 +108,52 @@ const loanData = [{
 }];
 
 function App() {
+    const [show, setShow] = useState(false);
+    const [inputInterest, setInputInterest] = useState("");
+    const handleClose = () => {
+        console.log("closed");
+        setShow(false);
+    }
+    const handleShow = () => setShow(true);
+
+    const rowEvents = {
+        onDoubleClick: (e, row, rowIndex) => {
+          handleShow();
+        }
+    };
+
     return ( 
-	<div className = "App" >
-            <h3 style = { { marginTop: 20 } } > Borrower App < /h3> 
-	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
-	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" /> 
-	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
+	<div className = "App" > 
+	    <h3 style = { { marginTop: 20 } } > Lender App </h3> 
+	    <Bootstraptab tabName = "Loan Applications" columns = { loanAppCol } colData = { loanAppData } rowEvents={ rowEvents }/> 
+	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } /> 
+	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } /> 
+	    <Modal show = { show } onHide = { handleClose } >
+            <Modal.Header closeButton >
+                    <Modal.Title > Submit Bid < /Modal.Title> 
+	        </Modal.Header> 
+	        <Modal.Body >
+                <div className="form-group">
+                    <label>Interest Rate:</label>
+                    <input
+                    type="text"
+                    value={inputInterest}
+                    name="inputInterest"
+                    onChange={e => this.handleChange(e)}
+                    className="form-control"
+                    />
+                </div>
+
+	        </Modal.Body> 
+	        <Modal.Footer>
+                    <Button variant = "secondary" onClick = { handleClose } >
+                    Cancel 
+	            </Button> 
+	            <Button variant = "primary" onClick = { handleClose } >
+                    Submit 
+	            </Button> 
+	        </Modal.Footer> 
+	    </Modal> 
 	</div>
     );
 }

@@ -109,20 +109,41 @@ const loanData = [{
 
 function App() {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [inputInterest, setInputInterest] = useState("");
+    const handleClose = () => {
+        console.log("closed");
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
+
+    const rowEvents = {
+        onDoubleClick: (e, row, rowIndex) => {
+          handleShow();
+        }
+    };
 
     return ( 
 	<div className = "App" > 
 	    <h3 style = { { marginTop: 20 } } > Lender App </h3> 
-	    <Bootstraptab tabName = "Loan Applications" columns = { loanAppCol } colData = { loanAppData } /> 
+	    <Bootstraptab tabName = "Loan Applications" columns = { loanAppCol } colData = { loanAppData } rowEvents={ rowEvents }/> 
 	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } /> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } /> 
-	    <Modal show = { false } onHide = { handleClose } >
-                <Modal.Header closeButton >
+	    <Modal show = { show } onHide = { handleClose } >
+            <Modal.Header closeButton >
                     <Modal.Title > Submit Bid < /Modal.Title> 
 	        </Modal.Header> 
-	        <Modal.Body > Woohoo, you 're reading this text in a modal! 
+	        <Modal.Body >
+                <div className="form-group">
+                    <label>Interest Rate:</label>
+                    <input
+                    type="text"
+                    value={inputInterest}
+                    name="inputInterest"
+                    onChange={e => this.handleChange(e)}
+                    className="form-control"
+                    />
+                </div>
+
 	        </Modal.Body> 
 	        <Modal.Footer>
                     <Button variant = "secondary" onClick = { handleClose } >
