@@ -3,6 +3,7 @@ import './App.css';
 import Bootstraptab from './Bootstraptab';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const loanAppCol = [{
         dataField: "id",
@@ -113,12 +114,54 @@ function App() {
         }
     };
 
+    const [showLoanApp, setShowLoanApp] = useState(false);
+
+    const closeLoanApp = () => {
+        setShowLoanApp(false);
+    }
+    const openLoanApp = () => setShowLoanApp(true);
+
     return ( 
 	<div className = "App" >
-        <h3 style = { { marginTop: 20 } } > Borrower App < /h3> 
+        <h3 style = { { marginTop: 20 } } > Borrower App < /h3>
+     
+            <Button variant = "primary" onClick={openLoanApp}>Apply For Loan</Button>
+            
+        
 	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
 	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" rowEvents={ rowEvents }/> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
+	    <Modal show = { showLoanApp } onHide = { closeLoanApp } >
+            <Modal.Header closeButton >
+                    <Modal.Title > Loan Application < /Modal.Title> 
+	        </Modal.Header> 
+	        <Modal.Body >
+                <Form.Group controlId="formAmount">
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control />
+                </Form.Group>
+                <Form.Group controlId="formcwExpireAt">
+                    <Form.Label>Expire At</Form.Label>
+                    <Form.Control />
+                </Form.Group>
+                <Form.Group controlId="formTerm">
+                    <Form.Label>Term</Form.Label>
+                    <Form.Control />
+                </Form.Group>
+                <Form.Group controlId="formPurpose">
+                    <Form.Label>Purpose</Form.Label>
+                    <Form.Control />
+                </Form.Group>
+	        </Modal.Body> 
+	        <Modal.Footer>
+                    <Button variant = "secondary" onClick = { closeLoanApp } >
+                    Cancel 
+	            </Button> 
+	            <Button variant = "primary" onClick = { closeLoanApp } >
+                    Submit 
+	            </Button> 
+	        </Modal.Footer> 
+	    </Modal> 
 	    <Modal show = { show } onHide = { handleClose } >
             <Modal.Header closeButton >
                     <Modal.Title > Accept Bid < /Modal.Title> 
