@@ -1,0 +1,88 @@
+import React, { Component } from 'react'  
+import BootstrapTable from 'react-bootstrap-table-next';  
+import axios from 'axios';  
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+export class Bootstraptab extends Component {  
+        state = {  
+		loanApplication: [],  
+                columns: [{  
+                  dataField: 'borrowerId',  
+                  text: 'Borrower',
+                },  
+                {  
+                  dataField: 'amount',  
+                  text: 'Amount',  
+                 sort:true  
+                }, {  
+                  dataField: 'expireBy',  
+                  text: 'Expire at',  
+                  sort: true  
+                },  
+                {  
+                        dataField: 'term',  
+                        text: 'Term',  
+                        sort: true  
+                      },  
+                      {  
+                        dataField: 'purpose',  
+                        text: 'Purepose',  
+                        sort: true  
+                      },  
+                      {  
+                        dataField: 'status',  
+                        text: 'Status',  
+                        sort: true  
+                      }]  
+              }  
+              componentDidMount() {
+		      this.setState({
+			      loanApplication: [{borrowerId: "John",
+				          amount: 1000,
+				          expireBy: "12/1/2020",
+				          term: 30,
+				          purpose: "rent",
+				          status: "active"
+			      		},{borrowerId: "John",
+				          amount: 1000,
+				          expireBy: "12/1/2020",
+				          term: 30,
+				          purpose: "rent",
+				          status: "active"
+			      }]
+				          
+
+		      });
+/*
+                axios.get('http://localhost:51760/Api/Emp/employee').then(response => {    
+                  console.log(response.data);    
+                  this.setState({    
+                        employee: response.data    
+                  });    
+                });
+*/
+              }   
+        render() {  
+                return (  
+                        <div className="container">  
+                        <div class="row" className="hdr">    
+                        <div class="col-sm-12 btn btn-info">    
+			Loan Applications
+                         </div>    
+                          </div>    
+                        <div  style={{ marginTop: 20 }}>  
+                        <BootstrapTable   
+                        striped  
+                        hover  
+                        keyField='borrowerId'   
+                        data={ this.state.loanApplication }   
+                        columns={ this.state.columns }
+			pagination={ paginationFactory() } />  
+                      </div>  
+                      </div>  
+                )  
+        }  
+}  
+
+export default Bootstraptab  
+
