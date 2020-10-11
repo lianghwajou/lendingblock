@@ -6,14 +6,16 @@ import App from './App'
 import BorrowerApp from './BorrowerApp'
 import LenderApp from './LenderApp'
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
     <div>
-      <Route path="/" component={BorrowerApp} />
-      <Route path="/borrower" component={BorrowerApp} />
-      <Route path="/lender" component={LenderApp} />
+      <Switch>
+        <Route path="/borrower" component={BorrowerApp} />
+        <Route path="/lender" component={LenderApp} />
+        <Route path="/" component={BorrowerApp} />
+      </Switch>
     </div>
   </BrowserRouter>,
   document.getElementById('root')
