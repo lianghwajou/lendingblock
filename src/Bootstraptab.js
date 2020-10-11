@@ -13,10 +13,10 @@ export class Bootstraptab extends Component {
             data: this.props.colData
         });
         /*
-                        axios.get('http://localhost:51760/Api/Emp/employee').then(response => {    
+                        axios.get(this.props.dataUrl).then(response => {    
                           console.log(response.data);    
                           this.setState({    
-                                employee: response.data    
+                                data: response.data    
                           });    
                         });
         */

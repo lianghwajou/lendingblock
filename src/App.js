@@ -100,9 +100,9 @@ function App() {
     return ( 
 	<div className = "App" >
             <h3 style = { { marginTop: 20 } } > Borrower App < /h3> 
-	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } noPage = { true } /> 
-	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } /> 
-	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } /> 
+	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
+	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" /> 
+	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
 	</div>
     );
 }
