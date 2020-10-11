@@ -1,7 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import Bootstraptab from './Bootstraptab';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const loanAppCol = [{
         dataField: "id",
@@ -97,12 +98,54 @@ const loanData = [{
 }];
 
 function App() {
+    const [show, setShow] = useState(false);
+    const [inputInterest, setInputInterest] = useState("");
+    const handleClose = () => {
+        console.log("closed");
+        setShow(false);
+    }
+    const handleShow = () => setShow(true);
+
+    const rowEvents = {
+        onDoubleClick: (e, row, rowIndex) => {
+          setInputInterest(row.interest);
+          handleShow();
+        }
+    };
+
     return ( 
 	<div className = "App" >
-            <h3 style = { { marginTop: 20 } } > Borrower App < /h3> 
+        <h3 style = { { marginTop: 20 } } > Borrower App < /h3> 
 	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
-	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" /> 
+	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" rowEvents={ rowEvents }/> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
+	    <Modal show = { show } onHide = { handleClose } >
+            <Modal.Header closeButton >
+                    <Modal.Title > Accept Bid < /Modal.Title> 
+	        </Modal.Header> 
+	        <Modal.Body >
+                <div className="form-group">
+                    <label>Interest Rate (%):</label>
+                    <input
+                    type="text"
+                    value={inputInterest}
+                    name="inputInterest"
+                    onChange={e => this.handleChange(e)}
+                    className="form-control"
+                    readOnly
+                    />
+                </div>
+
+	        </Modal.Body> 
+	        <Modal.Footer>
+                    <Button variant = "secondary" onClick = { handleClose } >
+                    Cancel 
+	            </Button> 
+	            <Button variant = "primary" onClick = { handleClose } >
+                    Submit 
+	            </Button> 
+	        </Modal.Footer> 
+	    </Modal> 
 	</div>
     );
 }
