@@ -2,13 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import './index.css';
-import App from './App';
+import App from './App'
+import BorrowerApp from './BorrowerApp'
+import LenderApp from './LenderApp'
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <div>
+      <Switch>
+        <Route path="/borrower" component={BorrowerApp} />
+        <Route path="/lender" component={LenderApp} />
+        <Route path="/" component={BorrowerApp} />
+      </Switch>
+    </div>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
