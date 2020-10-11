@@ -1,9 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Make sure to install react-router-dom
+
 ## Available Scripts
 
-In the project directory, you can run:
-
+In the project directory first run:
+### `npm install`
+To start the app:
 ### `npm start`
 
 Runs the app in the development mode.<br />

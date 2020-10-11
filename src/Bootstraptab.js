@@ -12,15 +12,8 @@ export class Bootstraptab extends Component {
         this.setState({
             data: this.props.colData
         });
-        /*
-                        axios.get(this.props.dataUrl).then(response => {    
-                          console.log(response.data);    
-                          this.setState({    
-                                data: response.data    
-                          });    
-                        });
-        */
     }
+    
     render() {
         return ( 
 	    <div className = "container" style = { { marginTop: 20 } } >
