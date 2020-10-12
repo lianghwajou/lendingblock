@@ -51,7 +51,7 @@ const bidCol = [{
     dataField: "interest",
     text: "Interest(%)"
 }];
-
+/*
 const bidData = [{
         lenderId: 1,
         bidAt: "11/10/2020",
@@ -68,7 +68,7 @@ const bidData = [{
         interest: 30
     }
 ];
-
+*/
 const loanCol = [{
     dataField: "loanId",
     text: "Loan ID"
@@ -98,7 +98,7 @@ const loanData = [{
     interest: 18
 }];
 
-function App() {
+function App(props) {
     const [show, setShow] = useState(false);
     const [inputInterest, setInputInterest] = useState("");
     const handleClose = () => {
@@ -110,6 +110,7 @@ function App() {
     const rowEvents = {
         onDoubleClick: (e, row, rowIndex) => {
           setInputInterest(row.interest);
+          props.bidData.push(row);
           handleShow();
         }
     };
@@ -121,16 +122,17 @@ function App() {
     }
     const openLoanApp = () => setShowLoanApp(true);
 
+
     return ( 
 	<div className = "App" >
         <h3 style = { { marginTop: 20 } } > Borrower App < /h3>
-        <div class="container">
-            <div class="text-right">
+        <div className="container">
+            <div className="text-right">
                 <Button variant = "primary" onClick={openLoanApp}>Apply For Loan</Button>
             </div>
         </div>
-	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
-	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" rowEvents={ rowEvents }/> 
+	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" /> 
+	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { props.bidData } dataUrl= "/bids" rowEvents={ rowEvents }/> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
 	    <Modal show = { showLoanApp } onHide = { closeLoanApp } >
             <Modal.Header closeButton >

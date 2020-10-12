@@ -6,11 +6,12 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 export class Bootstraptab extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: [],
+            columns: props.columns
+        }
     }
-    state = {
-        data: [],
-        columns: this.props.columns
-    }
+
 
     componentDidMount() {
         this.setState({
@@ -26,7 +27,7 @@ export class Bootstraptab extends Component {
 	            </div>     
 	        </div>
 	        <div style = { { marginTop: 20 } } >
-                    <BootstrapTable striped hover keyField = { this.state.columns[0].dataField } data = { this.state.data } columns = { this.state.columns } rowEvents = { this.props.rowEvents } pagination = { (this.props.noPage ? false : paginationFactory()) } />   
+                    <BootstrapTable striped hover keyField = { this.state.columns[0].dataField } data = { this.state.data } columns = { this.state.columns } rowEvents = { this.props.rowEvents } pagination =  { paginationFactory() } />   
 	        </div>
 	    </div>  
         )

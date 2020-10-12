@@ -63,13 +63,14 @@ const bidCol = [{
     text: "Interest(%)"
 }];
 
+/*
 const bidData = [{
     loanAppId: 1,
     amount: 1000,
     term: 30,
     interest: 18
 }];
-
+*/
 const loanCol = [{
     dataField: "loanId",
     text: "Loan ID"
@@ -99,7 +100,7 @@ const loanData = [{
     interest: 18
 }];
 
-function App() {
+function App(props) {
     const [show, setShow] = useState(false);
     const [inputInterest, setInputInterest] = useState("");
     const handleClose = () => {
@@ -118,7 +119,7 @@ function App() {
 	<div className = "App" > 
 	    <h3 style = { { marginTop: 20 } } > Lender App </h3> 
 	    <Bootstraptab tabName = "Loan Applications" columns = { loanAppCol } colData = { loanAppData } rowEvents={ rowEvents }/> 
-	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } /> 
+	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { props.bidData } /> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } /> 
 	    <Modal show = { show } onHide = { handleClose } >
             <Modal.Header closeButton >
@@ -131,7 +132,6 @@ function App() {
                     type="text"
                     value={inputInterest}
                     name="inputInterest"
-                    onChange={e => this.handleChange(e)}
                     className="form-control"
                     />
                 </div>
