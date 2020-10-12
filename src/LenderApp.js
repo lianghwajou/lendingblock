@@ -13,26 +13,21 @@ const loanAppCol = [{
     },
     {
         dataField: 'amount',
-        text: 'Amount',
+        text: 'Amount($)',
         sort: true
     }, {
         dataField: 'expireBy',
-        text: 'Expire at',
+        text: 'Expire At',
         sort: true
     },
     {
         dataField: 'term',
-        text: 'Term',
+        text: 'Term(days)',
         sort: true
     },
     {
         dataField: 'purpose',
-        text: 'Purepose',
-        sort: true
-    },
-    {
-        dataField: 'status',
-        text: 'Status',
+        text: 'Purpose',
         sort: true
     }
 ];
@@ -59,10 +54,10 @@ const bidCol = [{
     text: "Loan App ID"
 }, {
     dataField: "amount",
-    text: "Amount"
+    text: "Amount($)"
 }, {
     dataField: "term",
-    text: "Term",
+    text: "Term(days)",
 }, {
     dataField: "interest",
     text: "Interest(%)"
@@ -80,10 +75,10 @@ const loanCol = [{
     text: "Loan ID"
 }, {
     dataField: "amount",
-    text: "Amount"
+    text: "Amount($)"
 }, {
     dataField: "term",
-    text: "Term",
+    text: "Term(days)",
 }, {
     dataField: "issueDate",
     text: "Issue At",
@@ -131,7 +126,7 @@ function App() {
 	        </Modal.Header> 
 	        <Modal.Body >
                 <div className="form-group">
-                    <label>Interest Rate:</label>
+                    <label>Interest Rate(%):</label>
                     <input
                     type="text"
                     value={inputInterest}

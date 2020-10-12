@@ -14,21 +14,21 @@ const loanAppCol = [{
     },
     {
         dataField: 'amount',
-        text: 'Amount',
+        text: 'Amount($)',
         sort: true
     }, {
         dataField: 'expireBy',
-        text: 'Expire at',
+        text: 'Expire At',
         sort: true
     },
     {
         dataField: 'term',
-        text: 'Term',
+        text: 'Term(days)',
         sort: true
     },
     {
         dataField: 'purpose',
-        text: 'Purepose',
+        text: 'Purpose',
         sort: true
     }
 ];
@@ -45,7 +45,7 @@ const bidCol = [{
     dataField: "lenderId",
     text: "Lender ID"
 }, {
-    dataField: "bitAt",
+    dataField: "bidAt",
     text: "Bid At"
 }, {
     dataField: "interest",
@@ -54,17 +54,17 @@ const bidCol = [{
 
 const bidData = [{
         lenderId: 1,
-        bitAt: "11/10/2020",
+        bidAt: "11/10/2020",
         interest: 18
     },
     {
         lenderId: 1,
-        bitAt: "11/20/2020",
+        bidAt: "11/20/2020",
         interest: 25
     },
     {
         lenderId: 1,
-        bitAt: "11/25/2020",
+        bidAt: "11/25/2020",
         interest: 30
     }
 ];
@@ -74,10 +74,10 @@ const loanCol = [{
     text: "Loan ID"
 }, {
     dataField: "amount",
-    text: "Amount"
+    text: "Amount($)"
 }, {
     dataField: "term",
-    text: "Term",
+    text: "Term(days)",
 }, {
     dataField: "issueDate",
     text: "Issue At",
@@ -124,10 +124,11 @@ function App() {
     return ( 
 	<div className = "App" >
         <h3 style = { { marginTop: 20 } } > Borrower App < /h3>
-     
-            <Button variant = "primary" onClick={openLoanApp}>Apply For Loan</Button>
-            
-        
+        <div class="container">
+            <div class="text-right">
+                <Button variant = "primary" onClick={openLoanApp}>Apply For Loan</Button>
+            </div>
+        </div>
 	    <Bootstraptab tabName = "Current Loan Applications" columns = { loanAppCol } colData = { loanAppData } dataUrl= "/loadApps" noPage = { true } /> 
 	    <Bootstraptab tabName = "Active Bids" columns = { bidCol } colData = { bidData } dataUrl= "/bids" rowEvents={ rowEvents }/> 
 	    <Bootstraptab tabName = "Loans" columns = { loanCol } colData = { loanData } dataUrl="/loans" /> 
@@ -137,7 +138,7 @@ function App() {
 	        </Modal.Header> 
 	        <Modal.Body >
                 <Form.Group controlId="formAmount">
-                    <Form.Label>Amount</Form.Label>
+                    <Form.Label>Amount($)</Form.Label>
                     <Form.Control />
                 </Form.Group>
                 <Form.Group controlId="formcwExpireAt">
@@ -145,7 +146,7 @@ function App() {
                     <Form.Control />
                 </Form.Group>
                 <Form.Group controlId="formTerm">
-                    <Form.Label>Term</Form.Label>
+                    <Form.Label>Term(days)</Form.Label>
                     <Form.Control />
                 </Form.Group>
                 <Form.Group controlId="formPurpose">
@@ -168,12 +169,11 @@ function App() {
 	        </Modal.Header> 
 	        <Modal.Body >
                 <div className="form-group">
-                    <label>Interest Rate (%):</label>
+                    <label>Interest Rate(%):</label>
                     <input
                     type="text"
                     value={inputInterest}
                     name="inputInterest"
-                    onChange={e => this.handleChange(e)}
                     className="form-control"
                     readOnly
                     />
